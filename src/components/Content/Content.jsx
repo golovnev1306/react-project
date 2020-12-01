@@ -5,12 +5,12 @@ import About from './About/About';
 import Main from "./Main/Main";
 import News from "./News/News";
 
-const Content = () => {
+const Content = (props) => {
     return (
         <div className={s.content}>
             <Route exact path='/' component={Main}/>
             <Route path='/about' component={About}/>
-            <Route path='/News' component={News}/>
+            <Route path='/News' render={() => <News state = {props.state.newsPage} /> }/>
         </div>
     );
 }

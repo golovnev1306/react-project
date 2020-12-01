@@ -5,15 +5,16 @@ import Content from "./components/Content/Content";
 import Footer from "./components/Footer/Footer";
 import Sidebar from "./components/Sidebar/Sidebar";
 
-function App() {
+function App(props) {
     return (
         <div className="App">
             <Header/>
             <Sidebar/>
-            <Content/>
+            <Content state = {props.state}/>
             <Footer/>
         </div>
     );
 }
+
 
 export default App;

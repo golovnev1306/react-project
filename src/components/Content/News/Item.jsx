@@ -2,7 +2,10 @@ import React from 'react';
 
 const Item = (props) => {
     return (
-        <div>is Item {props.number}</div>
+        <div>
+            <div>is Item {props.number}</div>
+            <div>text is: {props.body}</div>
+        </div>
     );
 }
 
