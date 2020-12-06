@@ -3,14 +3,16 @@ import s from './Content.module.css';
 import {Route} from 'react-router-dom';
 import About from './About/About';
 import Main from "./Main/Main";
-import News from "./News/News";
+import NewsContainer from "./News/NewsContainer";
+import UsersContainer from "./Users/UsersContainer";
 
-const Content = (props) => {
+const Content = () => {
     return (
         <div className={s.content}>
             <Route exact path='/' component={Main}/>
             <Route path='/about' component={About}/>
-            <Route path='/News' render={() => <News state = {props.state.newsPage} /> }/>
+            <Route path='/news' render={ () => <NewsContainer/> } />
+            <Route path='/users' render={ () => <UsersContainer/> } />
         </div>
     );
 }

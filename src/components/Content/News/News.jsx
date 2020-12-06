@@ -1,39 +1,36 @@
 import React from 'react';
 import Item from "./Item";
 
+class News extends React.Component{
+    refText = React.createRef();
 
-let refText = React.createRef();
-
-
-
-
-
-const News = (props) => {
-
-    let addNewsHandler = () => {
-        props.state.addNews(refText.current.value);
+    addNewsHandler = () => {
+        this.props.addNews();
     }
 
-    let updateNewsBodyHandler = () => {
-        props.state.updateNewsBody(refText.current.value);
+    updateNewsBodyHandler = () => {
+        this.props.updateNewsBody(this.refText.current.value);
+    };
+
+    getNewsElements = () => {
+        return this.props.news.map((item) => {
+            return (<Item key={item.number} body={item.body} number={item.number}/>)
+        });
     }
 
-    let newsElements = props.state.news.map((item) => {
-        return (<Item body = {item.body} number = {item.number} />)
-    });
-    return (
-        <div>
-
-            {newsElements}
-
+    render = () => {
+        return (
             <div>
-                <input ref={refText} value={props.state.newsBody} type="text" placeholder="here add a new" onChange={updateNewsBodyHandler}/>
+                {this.getNewsElements()}
+                <div>
+                    <input ref={this.refText} value={this.props.newsBody} type="text" placeholder="here add a new"
+                           onChange={ this.updateNewsBodyHandler }/>
+                </div>
+                <div>
+                    <input type="submit" value="Add" onClick={ this.addNewsHandler }/>
+                </div>
             </div>
-            <div>
-                <input type="submit" value="Add" onClick={addNewsHandler}/>
-            </div>
-        </div>
-    );
+        );
+    }
 }
-
 export default News;

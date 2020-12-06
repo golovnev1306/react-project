@@ -15,6 +15,9 @@ const Sidebar = () => {
             <div>
                 <Link to='/news'>News</Link>
             </div>
+            <div>
+                <Link to='/users'>Users</Link>
+            </div>
         </div>
     );
 }
