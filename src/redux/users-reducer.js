@@ -1,9 +1,13 @@
 const SUBSCRIBE = 'SUBSCRIBE';
 const UNSUBSCRIBE = 'UNSUBSCRIBE';
 const SET_USERS = 'SET_USERS';
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 
 let initialState = {
-    users: []
+    users: [],
+    pageSize: 2,
+    currentPage: 1,
+    totalCount: 10
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -13,7 +17,7 @@ const usersReducer = (state = initialState, action) => {
                 ...state,
                 users: state.users.map((user) => {
                     if (action.idUser === user.id) {
-                        return {...user, subscribed: true}
+                        return {...user, followed: true}
                     }
                     return user;
                 })
@@ -23,7 +27,7 @@ const usersReducer = (state = initialState, action) => {
                 ...state,
                 users: state.users.map((user) => {
                     if (action.idUser === user.id) {
-                        return {...user, subscribed: false}
+                        return {...user, followed: false}
                     }
                     return user;
                 })
@@ -31,8 +35,14 @@ const usersReducer = (state = initialState, action) => {
         case SET_USERS:
             return {
                 ...state,
-                users: [...state.users, ...action.users]
+                users: [...action.users]
             }
+
+        case SET_CURRENT_PAGE:
+            return {
+                ...state,
+                currentPage: action.currentPage
+            };
         default:
             return state;
     }

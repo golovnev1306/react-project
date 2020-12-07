@@ -13,12 +13,12 @@ let initialState = {
 
 const newsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case (UPDATE_NEWS_BODY):
+        case UPDATE_NEWS_BODY:
             return {
                 ...state,
                 newsBody: action.text
             };
-        case (ADD_NEWS):
+        case ADD_NEWS:
             return {
                 ...state,
                 news: [...state.news, {
