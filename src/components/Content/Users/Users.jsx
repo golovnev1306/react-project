@@ -32,7 +32,8 @@ class Users extends React.Component {
                             className={`${(pageNum === this.props.currentPage) ? styles.active : ''} ${styles.item}`}
                         onClick={() => {
                             this.setCurrentPageHandler(pageNum);
-                        }}>{pageNum}</span>
+                        }}
+                        key={pageNum}>{pageNum}</span>
                     })}
                 </div>
                 {this.props.users.map(user => (<div key={user.id}>
