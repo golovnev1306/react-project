@@ -2,12 +2,15 @@ const SUBSCRIBE = 'SUBSCRIBE';
 const UNSUBSCRIBE = 'UNSUBSCRIBE';
 const SET_USERS = 'SET_USERS';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
+const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
+
 
 let initialState = {
     users: [],
     pageSize: 2,
     currentPage: 1,
-    totalCount: 10
+    totalCount: 10,
+    isFetching: false
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -43,9 +46,21 @@ const usersReducer = (state = initialState, action) => {
                 ...state,
                 currentPage: action.currentPage
             };
+        case TOGGLE_IS_FETCHING:
+            return {
+                ...state,
+                isFetching: action.isFetching
+            }
         default:
             return state;
+
     }
 }
+
+export const subscribe = id => ({type: "SUBSCRIBE", idUser: id});
+export const setUsers = users => ({type: "SET_USERS", users: users});
+export const setCurrentPage = currentPage => ({type: "SET_CURRENT_PAGE", currentPage: currentPage});
+export const unsubscribe = id => ({type: "UNSUBSCRIBE", idUser: id});
+export const toggleIsFetching = (isFetching) => ({type: "TOGGLE_IS_FETCHING", isFetching: isFetching});
 
 export default usersReducer;

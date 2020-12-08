@@ -1,9 +1,27 @@
 import News from "./News";
 import {connect} from "react-redux";
+import React from 'react';
+import {addNews, updateNewsBody} from "../../../redux/news-reducer";
+
+class NewsContainer extends React.Component{
+    refText = React.createRef();
+
+    addNewsHandler = () => {
+        this.props.addNews();
+    }
+
+    updateNewsBodyHandler = () => {
+        this.props.updateNewsBody(this.refText.current.value);
+    };
 
 
-let addNewsActionCreator = () => ({type: "add-news"});
-let updateTextNewsActionCreator = text => ({type: "update-news-body", text: text});
+    render = () => {
+        return <News state={ {...this.props} }
+                     updateNewsBodyHandler={this.updateNewsBodyHandler}
+                     addNewsHandler={this.addNewsHandler}
+                     refText={this.refText}/>;
+    }
+}
 
 const mapStateToProps = (state) => {
     return {
@@ -13,18 +31,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        addNews: () => {
-            dispatch(addNewsActionCreator());
-        },
-
-        updateNewsBody: (text) => {
-            dispatch(updateTextNewsActionCreator(text));
-        }
-    }
-}
-
-let NewsContainer = connect(mapStateToProps, mapDispatchToProps)(News);
-
-export default NewsContainer;
+export default connect(mapStateToProps, {addNews, updateNewsBody})(NewsContainer);

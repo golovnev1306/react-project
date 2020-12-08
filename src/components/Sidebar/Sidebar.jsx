@@ -1,11 +1,11 @@
 import React from 'react';
-import s from './Sidebar.module.css';
+import styles from './Sidebar.module.css';
 import {Link} from 'react-router-dom';
 
 
 const Sidebar = () => {
     return (
-        <div className={s.sidebar}>
+        <div className={styles.sidebar}>
             <div>
                 <Link to='/'>Home</Link>
             </div>

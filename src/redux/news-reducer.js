@@ -33,4 +33,8 @@ const newsReducer = (state = initialState, action) => {
     }
 }
 
+
+export const addNews = () => ({type: "add-news"});
+export const updateNewsBody = text => ({type: "update-news-body", text: text});
+
 export default newsReducer;

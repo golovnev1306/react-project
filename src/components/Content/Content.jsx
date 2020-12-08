@@ -1,18 +1,20 @@
 import React from 'react';
-import s from './Content.module.css';
+import styles from './Content.module.css';
 import {Route} from 'react-router-dom';
 import About from './About/About';
 import Main from "./Main/Main";
 import NewsContainer from "./News/NewsContainer";
 import UsersContainer from "./Users/UsersContainer";
+import ProfileContainer from "./Profile/ProfileContainer";
 
 const Content = () => {
     return (
-        <div className={s.content}>
+        <div className={styles.content}>
             <Route exact path='/' component={Main}/>
             <Route path='/about' component={About}/>
             <Route path='/news' render={ () => <NewsContainer/> } />
             <Route path='/users' render={ () => <UsersContainer/> } />
+            <Route path='/profile/:userId' render={ () => <ProfileContainer/> } />
         </div>
     );
 }

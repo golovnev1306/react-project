@@ -1,4 +1,5 @@
 .sidebar {
     grid-area: s;
     background-color: cornflowerblue;
+    padding: 10px;
 }

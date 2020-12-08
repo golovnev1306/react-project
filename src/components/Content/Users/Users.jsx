@@ -1,60 +1,47 @@
 import React from "react";
-import axios from 'axios';
 import styles from './users.module.css';
-
-class Users extends React.Component {
-    componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then((response) => {
-            this.props.setUsers(response.data.items);
-        });
+import Preloader from '../../common/Preloader'
 
 
+let Users = (props) => {
+    let pageCount = Math.ceil(props.state.totalCount / props.state.pageSize);
+    let pages = [];
+    for (let i = 0; i < pageCount; i++) {
+        pages.push(i + 1);
     }
+    return (
+        <div>
+            {props.state.isFetching ? <Preloader /> : null}
 
-    setCurrentPageHandler = (pageNum) => {
-        this.props.setCurrentPage(pageNum);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNum}&count=${this.props.pageSize}`).then((response) => {
-            this.props.setUsers(response.data.items);
-        });
-    }
-
-    render() {
-        this.pageCount = Math.ceil(this.props.totalCount / this.props.pageSize);
-        let pages = [];
-        for (let i = 0; i < this.pageCount; i++) {
-            pages.push(i + 1);
-        }
-        return (
             <div>
-                <div>
-                    {pages.map((pageNum) => {
-                        return <span
-                            className={`${(pageNum === this.props.currentPage) ? styles.active : ''} ${styles.item}`}
+                {pages.map((pageNum) => {
+                    return <span
+                        className={`${(pageNum === props.state.currentPage) ? styles.active : ''} ${styles.item}`}
                         onClick={() => {
-                            this.setCurrentPageHandler(pageNum);
+                            props.setCurrentPageHandler(pageNum);
                         }}
                         key={pageNum}>{pageNum}</span>
-                    })}
-                </div>
-                {this.props.users.map(user => (<div key={user.id}>
-                    <div>{user.name}</div>
-                    <div>{'user.surname'}</div>
-                    <div>{'user.location.country'}</div>
-                    <div>{'user.location.sity'}</div>
-                    <div>{user.status}</div>
-                    <div>
-                        {user.followed ?
-                            <input type='button' onClick={() => {
-                                this.props.unsubscribe(user.id);
-                            }} value="unsubscribe"/> :
-                            <input type='button' onClick={() => {
-                                this.props.subscribe(user.id);
-                            }} value="subscribe"/>}
-                    </div>
-                </div>))}
+                })}
             </div>
-        )
-    }
+            {props.state.users.map(user => (<div key={user.id} className={styles.userItem}>
+                <div><img src={user.photos.small} alt=""/></div>
+                <div><a href={`/profile/${user.id}`}>{user.name}</a></div>
+                <div>{'user.surname'}</div>
+                <div>{'user.location.country'}</div>
+                <div>{'user.location.sity'}</div>
+                <div>{user.status}</div>
+                <div>
+                    {user.followed ?
+                        <input type='button' onClick={() => {
+                            props.state.unsubscribe(user.id);
+                        }} value="unsubscribe"/> :
+                        <input type='button' onClick={() => {
+                            props.state.subscribe(user.id);
+                        }} value="subscribe"/>}
+                </div>
+            </div>))}
+        </div>
+    )
 }
 
 export default Users;
