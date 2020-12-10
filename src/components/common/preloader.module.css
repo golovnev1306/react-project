@@ -1,6 +1,8 @@
 .loader {
-    height: 50%;
-    width: 50%
+    height: 100vh;
+    width: 100vw;
+    z-index: 1000;
+    background-color: #aaa;
 }
 
 .loader .l_main {

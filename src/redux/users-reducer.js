@@ -1,3 +1,5 @@
+import {usersApi} from "../api/api";
+
 const SUBSCRIBE = 'SUBSCRIBE';
 const UNSUBSCRIBE = 'UNSUBSCRIBE';
 const SET_USERS = 'SET_USERS';
@@ -62,5 +64,16 @@ export const setUsers = users => ({type: "SET_USERS", users: users});
 export const setCurrentPage = currentPage => ({type: "SET_CURRENT_PAGE", currentPage: currentPage});
 export const unsubscribe = id => ({type: "UNSUBSCRIBE", idUser: id});
 export const toggleIsFetching = (isFetching) => ({type: "TOGGLE_IS_FETCHING", isFetching: isFetching});
+
+export const getUsers = (pageNum, pageSize) => {
+    return (dispatch) => {
+        dispatch(toggleIsFetching(true));
+        dispatch(setUsers([]));
+        usersApi.getUsers(pageNum, pageSize).then((users) => {
+            dispatch(setUsers(users));
+            dispatch(toggleIsFetching(false));
+        });
+    }
+}
 
 export default usersReducer;
