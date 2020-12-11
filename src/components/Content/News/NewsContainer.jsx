@@ -2,6 +2,7 @@ import News from "./News";
 import {connect} from "react-redux";
 import React from 'react';
 import {addNews, updateNewsBody} from "../../../redux/news-reducer";
+import {compose} from 'redux';
 
 class NewsContainer extends React.Component{
     refText = React.createRef();
@@ -31,4 +32,8 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {addNews, updateNewsBody})(NewsContainer);
+
+
+export default compose(
+    connect(mapStateToProps, {addNews, updateNewsBody}),
+)(NewsContainer);

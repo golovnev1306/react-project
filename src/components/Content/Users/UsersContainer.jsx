@@ -6,9 +6,11 @@ import {
     subscribe,
     unsubscribe
 } from "../../../redux/users-reducer";
+import {compose} from 'redux';
 
 
 import Users from "./Users";
+import withRedirect from "../../../hoc/withRedirect";
 
 class UsersContainer extends React.Component {
     componentDidMount() {
@@ -36,5 +38,9 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps,
-    {subscribe, unsubscribe, setCurrentPage, getUsers})(UsersContainer);
+
+
+export default compose(
+    withRedirect,
+    connect(mapStateToProps, {subscribe, unsubscribe, setCurrentPage, getUsers})
+)(UsersContainer);
