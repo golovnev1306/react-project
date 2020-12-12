@@ -7,6 +7,7 @@ import NewsContainer from "./News/NewsContainer";
 import UsersContainer from "./Users/UsersContainer";
 import ProfileContainer from "./Profile/ProfileContainer";
 import Test from './Test/Test';
+import StatusContainer from "./Status/StatusContainer";
 
 const Content = () => {
     return (
@@ -17,6 +18,7 @@ const Content = () => {
             <Route path='/users' render={ () => <UsersContainer/> } />
             <Route path='/profile/:userId' render={ () => <ProfileContainer/> } />
             <Route path='/test' component={Test}/>
+            <Route path='/status' component={StatusContainer}/>
         </div>
     );
 }
