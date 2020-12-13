@@ -1,24 +1,18 @@
 import News from "./News";
 import {connect} from "react-redux";
 import React from 'react';
-import {addNews, updateNewsBody} from "../../../redux/news-reducer";
+import {addNews} from "../../../redux/news-reducer";
 import {compose} from 'redux';
 
-class NewsContainer extends React.Component{
+class NewsContainer extends React.Component {
     refText = React.createRef();
 
-    addNewsHandler = () => {
-        this.props.addNews();
+    addNewsHandler = ({messageBody}) => {
+        this.props.addNews(messageBody);
     }
 
-    updateNewsBodyHandler = () => {
-        this.props.updateNewsBody(this.refText.current.value);
-    };
-
-
     render = () => {
-        return <News state={ {...this.props} }
-                     updateNewsBodyHandler={this.updateNewsBodyHandler}
+        return <News state={{...this.props}}
                      addNewsHandler={this.addNewsHandler}
                      refText={this.refText}/>;
     }
@@ -27,13 +21,10 @@ class NewsContainer extends React.Component{
 const mapStateToProps = (state) => {
     return {
         news: state.newsPage.news,
-        newsBody: state.newsPage.newsBody,
         counterNews: state.newsPage.counterNews,
     }
 }
 
-
-
 export default compose(
-    connect(mapStateToProps, {addNews, updateNewsBody}),
+    connect(mapStateToProps, {addNews}),
 )(NewsContainer);

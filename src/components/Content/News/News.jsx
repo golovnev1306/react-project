@@ -1,5 +1,6 @@
 import React from 'react';
 import Item from "./Item";
+import {Field, reduxForm} from "redux-form";
 
 let News = (props) => {
     return (
@@ -7,15 +8,24 @@ let News = (props) => {
             {props.state.news.map((item) => {
                 return (<Item key={item.number} body={item.body} number={item.number}/>)
             })}
-            <div>
-                <input ref={props.refText} value={props.state.newsBody} type="text" placeholder="here add a new"
-                       onChange={props.updateNewsBodyHandler}/>
-            </div>
-            <div>
-                <input type="submit" value="Add" onClick={props.addNewsHandler}/>
-            </div>
+            <AddMessageFormRedux onSubmit={props.addNewsHandler}/>
         </div>
     );
 }
+
+const addMessageForm = (props) => {
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <div>
+                <Field name='messageBody' component='input' type='text' placeholder='Input message here'/>
+            </div>
+            <div>
+                <button>Add</button>
+            </div>
+        </form>
+    );
+}
+
+const AddMessageFormRedux = reduxForm({form: 'addNews'})(addMessageForm)
 
 export default News;

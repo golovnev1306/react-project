@@ -1,4 +1,3 @@
-const UPDATE_NEWS_BODY = 'update-news-body';
 const ADD_NEWS = 'add-news';
 
 let initialState = {
@@ -7,25 +6,18 @@ let initialState = {
         {number: 2, body: 'news about toys'},
         {number: 3, body: 'news about policy'},
     ],
-    newsBody: '',
     counterNews: 4,
 };
 
 const newsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case UPDATE_NEWS_BODY:
-            return {
-                ...state,
-                newsBody: action.text
-            };
         case ADD_NEWS:
             return {
                 ...state,
                 news: [...state.news, {
                     number: state.counterNews,
-                    body: state.newsBody
+                    body: action.newsBody
                 }],
-                newsBody: '',
                 counterNews: state.counterNews + 1
             };
         default:
@@ -34,7 +26,6 @@ const newsReducer = (state = initialState, action) => {
 }
 
 
-export const addNews = () => ({type: "add-news"});
-export const updateNewsBody = text => ({type: "update-news-body", text: text});
+export const addNews = (newsBody) => ({type: "add-news", newsBody});
 
 export default newsReducer;

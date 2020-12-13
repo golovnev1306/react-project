@@ -4,7 +4,7 @@ const SET_USER_PROFILE_DATA = 'SET_USER_PROFILE_DATA';
 const SET_STATUS = 'SET_STATUS';
 
 let initialState = {
-    status: ''
+    status: 'default'
 };
 
 const profileReducer = (state = initialState, action) => {

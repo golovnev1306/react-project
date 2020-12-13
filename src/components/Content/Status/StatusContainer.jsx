@@ -4,12 +4,10 @@ import {setStatus} from "../../../redux/profile-reducer";
 import React from "react";
 
 
-class StatusContainer extends React.Component
-{
+class StatusContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            status: this.props.status,
             editMode: false
         }
     }
@@ -20,26 +18,29 @@ class StatusContainer extends React.Component
         });
     }
 
+    blurHandler = (event) => {
+        this.disableEditMode();
+        this.props.setStatus(event.currentTarget.value);
+    }
+
+    submitHandler = () => {
+
+    }
+
     disableEditMode = () => {
         this.setState({
             editMode: false
-        });
-        this.props.setStatus(this.state.status);
-    }
-
-    setLocalStatusHandler = (text) => {
-        this.setState({
-            status: text
         });
     }
 
     render() {
         return (
-            <Status status={this.state.status}
+            <Status status={this.props.status}
                     editMode={this.state.editMode}
-                    setLocalStatusHandler={this.setLocalStatusHandler}
                     enableEditMode={this.enableEditMode}
-                    disableEditMode={this.disableEditMode} />
+                    blurHandler={this.blurHandler}
+                    submitHandler={this.submitHandler}
+            />
         );
     }
 }

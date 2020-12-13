@@ -24,6 +24,9 @@ const Sidebar = () => {
             <div>
                 <Link to='/status'>Status</Link>
             </div>
+            <div>
+                <Link to='/login'>Login</Link>
+            </div>
         </div>
     );
 }
