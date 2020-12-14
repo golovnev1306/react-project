@@ -3,6 +3,7 @@ import {stopSubmit} from "redux-form";
 
 const SET_USER_DATA = 'SET_USER_DATA';
 const SET_USER_IS_LOGIN = 'SET_USER_IS_LOGIN';
+const USER_CLEAN = 'USER_CLEAN';
 
 let initialState = {
     userData: {
@@ -25,6 +26,15 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 isLogin: action.isLogin
             };
+        case USER_CLEAN:
+            return {
+                userData: {
+                    id: null,
+                    login: null,
+                    email: null
+                },
+                isLogin: false
+            };
         default:
             return state;
     }
@@ -32,10 +42,12 @@ const authReducer = (state = initialState, action) => {
 
 export const setUserData = (userData) => ({type: "SET_USER_DATA", userData: userData});
 export const setUserIsLogin = (isLogin) => ({type: "SET_USER_IS_LOGIN", isLogin: isLogin});
+export const userClean = () => ({type: "USER_CLEAN"});
+
 
 export const getUser = () => {
     return (dispatch) => {
-        authApi.getUserData().then((userData) => {
+        return authApi.getUserData().then((userData) => {
             if (userData.resultCode === 0) {
                 dispatch(setUserIsLogin(true));
                 dispatch(setUserData(userData.data));
@@ -50,7 +62,7 @@ export const login = (email, password, rememberMe = false) => {
     return (dispatch) => {
         authApi.login(email, password, rememberMe).then((response) => {
             if (response.data.resultCode === 0) {
-                dispatch(getUser);
+                dispatch(getUser());
             } else {
                 if (response.data.messages?.[0]) {
                     dispatch(stopSubmit('login', {
@@ -58,6 +70,14 @@ export const login = (email, password, rememberMe = false) => {
                     }));
                 }
             }
+        });
+    }
+}
+
+export const unlogin = () => {
+    return (dispatch) => {
+        authApi.unlogin().then(()=> {
+            dispatch(userClean());
         });
     }
 }

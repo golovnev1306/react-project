@@ -5,7 +5,8 @@ import {required} from "../../../utils/validators";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {login} from "../../../redux/auth-reducer";
-import styles from './Login.module.css'
+import styles from './Login.module.css';
+import {Redirect} from 'react-router-dom';
 
 class Login extends React.Component {
     onSubmitMyFunc = (values) => {
@@ -13,6 +14,9 @@ class Login extends React.Component {
     }
 
     render = () => {
+        if (this.props.isLogin) {
+            return <Redirect to='/' />
+        }
         return (
             <LoginFormRedux onSubmit={this.onSubmitMyFunc}/>
         );
@@ -34,5 +38,10 @@ let LoginForm = (props) => {
 
 const LoginFormRedux = compose(reduxForm({form: 'login'}))(LoginForm);
 
+let mapStateToProps = (state) => {
+    return {
+        isLogin: state.auth.isLogin
+    }
+}
 
-export default connect(null, {login})(Login);
+export default connect(mapStateToProps, {login})(Login);

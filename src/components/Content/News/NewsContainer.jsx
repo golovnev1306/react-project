@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import React from 'react';
 import {addNews} from "../../../redux/news-reducer";
 import {compose} from 'redux';
+import withRedirect from "../../../hoc/withRedirect";
 
 class NewsContainer extends React.Component {
     refText = React.createRef();
@@ -26,5 +27,6 @@ const mapStateToProps = (state) => {
 }
 
 export default compose(
+    withRedirect,
     connect(mapStateToProps, {addNews}),
 )(NewsContainer);

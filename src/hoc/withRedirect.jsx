@@ -11,7 +11,7 @@ let mapStateToProps = (state) => {
 const withRedirect = (Component) => {
     return connect(mapStateToProps)((props) => {
         if (!props.isLogin) {
-            return <Redirect to='/'/>;
+            return <Redirect to='/login'/>;
         }
 
         return (
