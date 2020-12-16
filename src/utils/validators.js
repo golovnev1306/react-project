@@ -2,7 +2,7 @@ const required = (value) => {
     if (value?.length > 0) {
         return undefined;
     }
-    return 'Field is required for field';
+    return 'Field is required for fill';
 }
 
 const maxLength = (length) => {

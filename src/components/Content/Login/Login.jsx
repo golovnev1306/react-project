@@ -7,6 +7,7 @@ import {compose} from "redux";
 import {login} from "../../../redux/auth-reducer";
 import styles from './Login.module.css';
 import {Redirect} from 'react-router-dom';
+import {getIsLogin} from "../../../redux/selectors/login-selectors";
 
 class Login extends React.Component {
     onSubmitMyFunc = (values) => {
@@ -40,7 +41,7 @@ const LoginFormRedux = compose(reduxForm({form: 'login'}))(LoginForm);
 
 let mapStateToProps = (state) => {
     return {
-        isLogin: state.auth.isLogin
+        isLogin: getIsLogin(state)
     }
 }
 

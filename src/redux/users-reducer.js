@@ -65,7 +65,7 @@ export const setCurrentPage = currentPage => ({type: "SET_CURRENT_PAGE", current
 export const unsubscribe = id => ({type: "UNSUBSCRIBE", idUser: id});
 export const toggleIsFetching = (isFetching) => ({type: "TOGGLE_IS_FETCHING", isFetching: isFetching});
 
-export const getUsers = (pageNum, pageSize) => {
+export const getUsersRequest = (pageNum, pageSize) => {
     return (dispatch) => {
         dispatch(toggleIsFetching(true));
         dispatch(setUsers([]));

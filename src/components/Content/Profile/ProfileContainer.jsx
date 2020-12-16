@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {getProfile, setUserProfileData} from '../../../redux/profile-reducer';
 import Profile from "./Profile";
 import {withRouter} from 'react-router-dom';
+import {getUserData} from "../../../redux/selectors/profile-selectors";
 
 class ProfileContainer extends React.Component {
 
@@ -24,7 +25,7 @@ class ProfileContainer extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        userData: state.profilePage.userData,
+        userData: getUserData(state),
     };
 }
 

@@ -1,0 +1,1 @@
+export const getIsLogin = state => state.auth.isLogin;

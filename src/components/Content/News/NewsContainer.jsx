@@ -4,8 +4,10 @@ import React from 'react';
 import {addNews} from "../../../redux/news-reducer";
 import {compose} from 'redux';
 import withRedirect from "../../../hoc/withRedirect";
+import {getCountNews, getNewsSuper} from "../../../redux/selectors/news-selectors";
 
 class NewsContainer extends React.Component {
+
     refText = React.createRef();
 
     addNewsHandler = ({messageBody}) => {
@@ -21,8 +23,8 @@ class NewsContainer extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        news: state.newsPage.news,
-        counterNews: state.newsPage.counterNews,
+        news: getNewsSuper(state),
+        counterNews:getCountNews(state),
     }
 }
 

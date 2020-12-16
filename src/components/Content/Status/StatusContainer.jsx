@@ -2,6 +2,7 @@ import {connect} from "react-redux";
 import Status from "./Status";
 import {setStatus} from "../../../redux/profile-reducer";
 import React from "react";
+import {getStatus} from "../../../redux/selectors/status-selectors";
 
 
 class StatusContainer extends React.Component {
@@ -47,7 +48,7 @@ class StatusContainer extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        status: state.profilePage.status
+        status: getStatus(state)
     }
 }
 

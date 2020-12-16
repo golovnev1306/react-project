@@ -11,6 +11,9 @@ let initialState = {
 
 const newsReducer = (state = initialState, action) => {
     switch (action.type) {
+        case 'FAKE':
+            console.log('we into case');
+            return {...state}
         case ADD_NEWS:
             return {
                 ...state,
